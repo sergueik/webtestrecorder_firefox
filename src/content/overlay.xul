@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/*******************************************************************************
+ * Copyright (c) 2006-2007 Marc Guillemot.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Marc Guillemot - initial version
+ *******************************************************************************/
+-->
+<!DOCTYPE overlay SYSTEM "chrome://webtestrecorder/locale/overlay.dtd">
+
+<overlay id="webtestrecorder-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/WTRStep.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/myThis.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/log.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/WTR_base.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/preferences.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/overlay.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/webtest-steps.js" />
+
+	<commandset id="mainCommandSet">
+		<command id="wtr_cmd_ShowSidebar" oncommand="WTR_Overlay.ShowSidebar()"/>
+	</commandset>
+
+	<broadcasterset id="mainBroadcasterSet">
+		<broadcaster label="&webtestrecorder.label;" group="sidebar" id="webtestRecorderSidebar"
+			sidebarurl="chrome://webtestrecorder/content/webtestrecorder.xul" sidebartitle="Webtest Recorder"/>
+	</broadcasterset>
+
+	<keyset id="mainKeyset">
+		<key id="wtr_key_ShowSidebar" key="W" command="wtr_cmd_ShowSidebar" modifiers="alt,shift"/>
+	</keyset>
+
+	<menupopup id="menu_ToolsPopup">
+		<menuitem label="Webtest Recorder Sidebar" command="wtr_cmd_ShowSidebar" key="wtr_key_ShowSidebar"
+			id="wtr_ToolMenuItem" type="checkbox"/>
+	</menupopup>
+
+	<popup id="contentAreaContextMenu">
+		<menuitem id="wtr_cmdVerifyText" label="&webtestrecorder.contextmenu.verifyText;" position="1" oncommand="WTR_Overlay.addVerifyText(event)"
+			hidden="true" />
+		<menuitem id="wtr_cmdVerifyTitle" label="Add verifyTitle for this page: " position="2" oncommand="WTR_Overlay.addVerifyTitle(event)"
+			hidden="true" />
+		<menuitem id="wtr_cmdVerifySelectField" label="Add verifySelectField for " position="3" oncommand="WTR_Overlay.addVerifySelectField(event)"
+			hidden="true" />
+		<menuitem id="wtr_cmdVerifyInputField" label="Add verifyInputField for " position="4" oncommand="WTR_Overlay.addVerifyInputField(event)"
+			hidden="true" />
+		<menuitem id="wtr_cmdVerifyTextArea" label="Add verifyTextArea for " position="5" oncommand="WTR_Overlay.addVerifyTextArea(event)"
+			hidden="true" />
+		<menuitem id="wtr_cmdMakeLinksLive" label="Make links live" position="6" oncommand="WTR_Overlay.makeLinksLive(event)"
+			hidden="true" />
+		<menuitem id="wtr_loadResourcesFromOriginalSite" label="Load images/css from original site" position="7" oncommand="WTR_Overlay.loadResourcesFromOriginalSite(event)"
+			hidden="true" />
+		<menuseparator id="wtr_cmdSeparatorBeforeVerifyText" position="7" hidden="true" />
+	</popup>
+</overlay>

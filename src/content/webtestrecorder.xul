@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/*******************************************************************************
+ * Copyright (c) 2006 Marc Guillemot.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Marc Guillemot - initial version
+ *******************************************************************************/
+-->
+<!DOCTYPE window [
+	<!ENTITY xpath.coltype.tooltip "The type of the node">
+	<!ENTITY steps.source.wrap "Wrap text">
+]
+>
+
+<?xml-stylesheet href="chrome://global/skin" type="text/css"?>
+<?xml-stylesheet href="chrome://webtestrecorder/content/webtest.css" type="text/css"?>
+
+<window title="Webtest Recorder" id="webtest-recorder" windowtype="global:webtest-recorder"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+onload="WTR_Sidebar.onLoad(event)" onunload="WTR_Sidebar.onUnload(event)">
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/myThis.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/preferences.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/log.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/WTRStep.js" />
+
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/WTR_base.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/webtest-steps.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/webtestrecorder.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/stylesheet_utils.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/xpath.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/xpathPicker.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/sidebar.js" />
+	<script type="application/x-javascript" src="chrome://webtestrecorder/content/WTREditorCtxMenu.js" />
+
+	<keyset>
+		<key id="close-key" modifiers="accel" key="W" oncommand="window.close();" />
+	</keyset>
+
+
+	<hbox>
+		<checkbox id="enableRecording" label="Enable recording" checked="true"
+			oncommand="wtr_Misc.toggleRecordingEnabled(this.checked)" />
+		<spacer flex="1" />
+	</hbox>
+
+
+	<vbox flex="5">
+	<tabbox flex="5">
+		<tabs>
+			<tab label="XML" selected="true"/> 
+			<tab><description id="wtrGroovyTab">Groovy</description></tab>
+			<tab label="WebDriver"/> 
+		</tabs>
+		<tabpanels flex="1">
+			<tabpanel id="tabPrettyXML" orient="vertical" class="editorTabPanel" context="editorContextMenu">
+				<iframe id="edSource" src="chrome://webtestrecorder/content/editors/xml.html" style="border: 1px solid #000000; margin-top: 2px;margin-left: 1px;" flex="1"/>
+			</tabpanel>
+			<tabpanel id="tabSourceGroovy" orient="vertical" context="editorContextMenu">
+				<iframe id="edSourceGroovy" src="chrome://webtestrecorder/content/editors/groovy.html" flex="1"/>
+			</tabpanel>
+			<tabpanel id="tabSourceWebDriver" orient="vertical" context="editorContextMenu">
+				<label style="font-weight: bold">Experimental</label>
+				<iframe id="edSourceWebDriver" src="chrome://webtestrecorder/content/editors/webdriver/webdriver_editor.html" flex="1"/>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	
+<menupopup id="editorContextMenu" onpopupshowing="WTREditorCtxMenu.onPopupShowing(this)">
+  <menuitem label="No alternative available" id="editorCtxMenu_noAlternative" disabled="true"/>
+  <menuitem label="-" id="alternative0" hidden="true" oncommand="WTREditorCtxMenu.showAlternative(this)"/>
+  <menuitem label="-" id="alternative1" hidden="true" oncommand="WTREditorCtxMenu.showAlternative(this)"/>
+  <menuitem label="-" id="alternative2" hidden="true" oncommand="WTREditorCtxMenu.showAlternative(this)"/>
+  <menuitem label="-" id="alternative3" hidden="true" oncommand="WTREditorCtxMenu.showAlternative(this)"/>
+  <menuitem label="-" id="alternative4" hidden="true" oncommand="WTREditorCtxMenu.showAlternative(this)"/>
+  <menuseparator/>
+  <menuitem label="Copy all" oncommand="WTREditorCtxMenu.copyToClipboard(this)"/>
+  <menuitem label="Delete all" oncommand="WTREditorCtxMenu.deleteAll(this)"/>
+</menupopup>
+
+	<separator flex="0"/>
+	</vbox>
+
+	<splitter flex="0"/>
+	
+	<vbox flex="3">
+	<separator flex="0"/>
+
+	<tabbox flex="3">
+		<tabs>
+			<tab label="XPath" id="tabXPath"/>
+			<tab label="XPath Picker" id="tabXPathPicker" hidden="true"/>
+			<tab label="Debug" id="tabDebug" hidden="true"/>
+		</tabs>
+		<tabpanels flex="1">
+			<tabpanel id="tabXPath" orient="vertical">
+				<hbox align="center">
+					<label control="tbXPath" value="XPath:" flex="0" />
+					<textbox id="tbXPath" rows="1" multiline="false" flex="10" timeout="500" type="timed" oncommand="xpathTreeView.evaluateXPath()"/>
+					<button id="btEvaluateXPath" label="GO" oncommand="xpathTreeView.evaluateXPath()" accesskey="g" flex="0" hidden="true"/>
+				</hbox>
+				<tree id="treeXPathResults" flex="1" enableColumnDrag="true" onselect="xpathTreeView.handleSelection(this)">
+					<treecols>
+						<treecol id="wtr_XPathResultTree_type" label="Type" tooltiptext="&xpath.coltype.tooltip;"
+							persist="width" flex="1" fixed="false" />
+						<splitter class="tree-splitter" />
+						<treecol id="wtr_XPathResultTree_nodeName" label="Node name" persist="width" flex="1"
+							fixed="false" />
+						<splitter class="tree-splitter" />
+						<treecol id="wtr_XPathResultTree_value" label="value" persist="width" flex="10" fixed="false" />
+					</treecols>
+					<treechildren />
+				</tree>
+				<label id="xpath_nbResults" value="Nb results:" flex="0"/>
+			</tabpanel>
+			<tabpanel id="tabXPathPicker" orient="vertical">
+				<label>dev mode</label>
+				<button id="btnXPathPicker" label="pick" oncommand="wtr_XPathPicker.startPicker()"/>
+			</tabpanel>
+			<tabpanel id="tabDebug" orient="vertical">
+				<label>For debug purposes only</label>
+				<textbox id="tbRunCommand" multiline="true" flex="1"/>
+				<label value="run..."
+					onclick="wtr_Misc.testRun(document.getElementById('tbRunCommand').value)" />
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	</vbox>
+</window>
+

@@ -1,0 +1,4 @@
+content	webtestrecorder	jar:chrome/webtestrecorder.jar!/content/
+content	webtestrecorder	jar:chrome/webtestrecorder.jar!/content/ contentaccessible=yes
+locale  webtestrecorder en-US       jar:chrome/webtestrecorder.jar!/locale/en-US/webtestrecorder/
+overlay	chrome://browser/content/browser.xul	chrome://webtestrecorder/content/overlay.xul
