@@ -9,6 +9,6 @@
  *    Marc Guillemot - initial version
  *******************************************************************************/
 
-pref("webtestrecorder.buttonLocator", "ByName");
-pref("webtestrecorder.debug.show", "");
-pref("webtestrecorder.originalversion", "@versionNumber@");
+pref('webtestrecorder.buttonLocator', 'ByName');
+pref('webtestrecorder.debug.show', '');
+pref('webtestrecorder.originalversion', '@versionNumber@');

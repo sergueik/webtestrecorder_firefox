@@ -11,7 +11,7 @@
 
 var WTR_Preferences = new Object();
 
-WTR_Preferences.BRANCH_NAME = "webtestrecorder.";
+WTR_Preferences.BRANCH_NAME = 'webtestrecorder.';
 
 /**
 Gets the value of a string preference
@@ -30,7 +30,7 @@ WTR_Preferences.getStrings = function(_strKey)
 {
 	try
 	{
-		return this._getBranch().getCharPref(_strKey).split(",");
+		return this._getBranch().getCharPref(_strKey).split(',');
 	}
 	catch (e)
 	{
@@ -43,5 +43,5 @@ Gets the branch containing the preferences for this extension
 */
 WTR_Preferences._getBranch = function()
 {
-	return Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch(this.BRANCH_NAME);
+	return Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch(this.BRANCH_NAME);
 }

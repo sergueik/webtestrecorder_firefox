@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marc Guillemot - initial version
+ *	Marc Guillemot - initial version
  *******************************************************************************/
 
 /*
@@ -21,11 +21,11 @@ wtr_XPathPicker.log = new Log("xpathPicker.js");
 
 wtr_XPathPicker.startPicker = function()
 {
-    var oDoc = window.top.getBrowser().browsers[window.top.getBrowser().mTabBox.selectedIndex].contentDocument;
-    
-    this.log.debug("Configuring XPath Picker for " + oDoc);
+	var oDoc = window.top.getBrowser().browsers[window.top.getBrowser().mTabBox.selectedIndex].contentDocument;
+	
+	this.log.debug("Configuring XPath Picker for " + oDoc);
 	oDoc.addEventListener("mouseover", this.showXPath, true);
-    oDoc.addEventListener("click", this.pickXPath, true);
+	oDoc.addEventListener("click", this.pickXPath, true);
 
 	StylesheetUtis_addStyleSheet(oDoc, "chrome://webtestrecorder/content/stylesheets/xpathPicker.css");
 }
@@ -37,23 +37,23 @@ Shows an XPath expression for the node under the mouse
 wtr_XPathPicker.showXPath = function(_event)
 {
 	var mySelf = arguments.callee;
-    var eventTarget = _event.target;
-    mySelf.myThis.log.debug("target: " + eventTarget);
+	var eventTarget = _event.target;
+	mySelf.myThis.log.debug("target: " + eventTarget);
 
-    // If there is a target
-    if (eventTarget)
-    {
-        var tagName = eventTarget.tagName;
+	// If there is a target
+	if (eventTarget)
+	{
+		var tagName = eventTarget.tagName;
 
-        // If the tag name is set and does not equal scrollbar
-        if(tagName && tagName != "scrollbar")
-        {
-        	var oWindow = eventTarget.ownerDocument.defaultView;
-            oWindow.status = mySelf.myThis.computeAbsoluteXPath(eventTarget);
+		// If the tag name is set and does not equal scrollbar
+		if(tagName && tagName != "scrollbar")
+		{
+			var oWindow = eventTarget.ownerDocument.defaultView;
+			oWindow.status = mySelf.myThis.computeAbsoluteXPath(eventTarget);
 
-            _event.preventDefault();
-        }
-    }
+			_event.preventDefault();
+		}
+	}
 }
 wtr_XPathPicker.showXPath.myThis = wtr_XPathPicker;
 
@@ -63,25 +63,25 @@ Picks the XPath expression for the node under the mouse
 wtr_XPathPicker.pickXPath = function(_event)
 {
 	var mySelf = arguments.callee;
-    var eventTarget = _event.target;
-    mySelf.myThis.log.debug("target: " + eventTarget);
+	var eventTarget = _event.target;
+	mySelf.myThis.log.debug("target: " + eventTarget);
 
-    // If there is a target
-    if (eventTarget)
-    {
-        var tagName = eventTarget.tagName;
+	// If there is a target
+	if (eventTarget)
+	{
+		var tagName = eventTarget.tagName;
 
-        // If the tag name is set and does not equal scrollbar
-        if(tagName && tagName != "scrollbar")
-        {
-        	var oWindow = eventTarget.ownerDocument.defaultView;
-            oWindow.status = mySelf.myThis.computeAbsoluteXPath(eventTarget);
+		// If the tag name is set and does not equal scrollbar
+		if(tagName && tagName != "scrollbar")
+		{
+			var oWindow = eventTarget.ownerDocument.defaultView;
+			oWindow.status = mySelf.myThis.computeAbsoluteXPath(eventTarget);
 
-            _event.preventDefault();
-        }
-    }
-    
-    mySelf.myThis.deregisterXPathPicker();
+			_event.preventDefault();
+		}
+	}
+	
+	mySelf.myThis.deregisterXPathPicker();
 }
 wtr_XPathPicker.pickXPath.myThis = wtr_XPathPicker;
 

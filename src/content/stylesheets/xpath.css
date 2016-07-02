@@ -6,16 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Marc Guillemot - initial version
+ *	Marc Guillemot - initial version
  *******************************************************************************/
 
 *[wtrxpath="selected"]
 {
-    outline: 1px solid #ff4400 !important;
+	outline: 1px solid #ff4400 !important;
 	background-color: #ffcccc;
 }
 
 *[wtrxpath]
 {
-    outline: 1px solid #ff0000 !important;
+	outline: 1px solid #ff0000 !important;
 }

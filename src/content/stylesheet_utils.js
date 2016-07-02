@@ -19,16 +19,16 @@ function StylesheetUtis_addStyleSheet(_document, _location)
 	// don't load stylesheet again if already loaded in this document	
 	if (!_document.wtr_loadedStyleSheets[_location])
 	{
-	    var linkElement = _document.createElement("link");
+	    var linkElement = _document.createElement('link');
 	
-	    linkElement.setAttribute("href", _location);
-	    linkElement.setAttribute("id", "toto");
-	    linkElement.setAttribute("media", "all");
-	    linkElement.setAttribute("rel", "stylesheet");
-	    linkElement.setAttribute("type", "text/css");
+	    linkElement.setAttribute('href', _location);
+	    linkElement.setAttribute('id', 'toto');
+	    linkElement.setAttribute('media', 'all');
+	    linkElement.setAttribute('rel', 'stylesheet');
+	    linkElement.setAttribute('type', 'text/css');
 	
 	    // If there is a head element
-	    var headElementList = _document.getElementsByTagName("head");
+	    var headElementList = _document.getElementsByTagName('head');
 	    if (headElementList.length > 0)
 	    {
 	        headElementList[0].appendChild(linkElement);

@@ -11,7 +11,7 @@
 
 var WTR_Overlay = new WTR_base();
 
-WTR_Overlay.log = new Log("overlay.js");
+WTR_Overlay.log = new Log('overlay.js');
 
 /**
 Called on display of the context menu.
@@ -31,7 +31,7 @@ WTR_Overlay.onPopupShown_ = function(_oEvent)
 		{
 			this.showIfSelection();
 
-			var oCmd = document.getElementById("wtr_cmdVerifyTitle");
+			var oCmd = document.getElementById('wtr_cmdVerifyTitle');
 			if (!oCmd.originalLabel)
 				oCmd.originalLabel = oCmd.label;
 	
@@ -43,24 +43,24 @@ WTR_Overlay.onPopupShown_ = function(_oEvent)
 //			var focusedElement = document.popupNode;
 			if (focusedElement)
 			{
-				if (focusedElement.tagName == "SELECT")
+				if (focusedElement.tagName == 'SELECT')
 				{
 					// verifySelectField
-					this._showMenuElement("wtr_cmdVerifySelectField", focusedElement.name);
+					this._showMenuElement('wtr_cmdVerifySelectField', focusedElement.name);
 				}
-				else if (focusedElement.tagName == "INPUT" 
-							&& (focusedElement.type == "text" || focusedElement.type == "password"))
+				else if (focusedElement.tagName == 'INPUT' 
+							&& (focusedElement.type == 'text' || focusedElement.type == 'password'))
 				{
-					this._showMenuElement("wtr_cmdVerifyInputField", focusedElement.name);
+					this._showMenuElement('wtr_cmdVerifyInputField', focusedElement.name);
 				}
-				else if (focusedElement.tagName == "TEXTAREA")
+				else if (focusedElement.tagName == 'TEXTAREA')
 				{
-					this._showMenuElement("wtr_cmdVerifyTextArea", focusedElement.name);
+					this._showMenuElement('wtr_cmdVerifyTextArea', focusedElement.name);
 				}
 			}
 
 			// separator
-			document.getElementById("wtr_cmdSeparatorBeforeVerifyText").hidden = false;
+			document.getElementById('wtr_cmdSeparatorBeforeVerifyText').hidden = false;
 		}
 		
 		// Make links live should be available even if side bar is not displayed
@@ -97,24 +97,24 @@ WTR_Overlay.showIfSelection = function()
 
 	if (bSelection)
 	{
-		myThis._showMenuElement("wtr_cmdVerifyText", strSelection);
+		myThis._showMenuElement('wtr_cmdVerifyText', strSelection);
 	}
 }
 
 
 /**
-Shows the "make links live" menu point only if we are on a page capture by webtest
+Shows the 'make links live' menu point only if we are on a page capture by webtest
 */
 WTR_Overlay._showIfNeeded_makeLinksLive = function(_oEvent)
 {
 	var myThis = arguments.callee.myThis;
 	var oWin = myThis._getWindow(_oEvent);
-	var bShow = (oWin.location.search.indexOf("baseUrl") > -1)
-//	myThis.log.debug("_showIfNeeded_makeLinksLive: " + bShow);
+	var bShow = (oWin.location.search.indexOf('baseUrl') > -1)
+//	myThis.log.debug('_showIfNeeded_makeLinksLive: ' + bShow);
 	if (bShow)
 	{
-		myThis._showMenuElement("wtr_cmdMakeLinksLive");
-		myThis._showMenuElement("wtr_loadResourcesFromOriginalSite");
+		myThis._showMenuElement('wtr_cmdMakeLinksLive');
+		myThis._showMenuElement('wtr_loadResourcesFromOriginalSite');
 	}
 }
 
@@ -134,13 +134,13 @@ WTR_Overlay.hideWTRControls_ = function(_oEvent)
 	var myThis = arguments.callee.myThis;
 	try
 	{
-		var oMenu = document.getElementById("contentAreaContextMenu");
+		var oMenu = document.getElementById('contentAreaContextMenu');
 		var oMenuElements = oMenu.childNodes;
 		
 		for (var i=0; i<oMenuElements.length; ++i)
 		{
 			var oMenuElt = oMenuElements[i];
-			if (oMenuElt.id.indexOf("wtr_") == 0)
+			if (oMenuElt.id.indexOf('wtr_') == 0)
 			{
 				oMenuElt.hidden = true;
 			}
@@ -160,7 +160,7 @@ WTR_Overlay.ShowSidebar = function()
 	var myThis = arguments.callee.myThis;
 	try
 	{
-		const sidebarId = "webtestRecorderSidebar";
+		const sidebarId = 'webtestRecorderSidebar';
 		toggleSidebar(sidebarId);
 	}
 	catch (e)
@@ -180,7 +180,7 @@ WTR_Overlay.addVerifyTitle = function(_oEvent)
 	{
 		var oDocument = myThis._getDocument(_oEvent);
 	
-		var oStep = new WTRStep("verifyTitle", {text: oDocument.title});
+		var oStep = new WTRStep('verifyTitle', {text: oDocument.title});
 		myThis.addStep(oStep, oDocument, _oEvent);
 	}
 	catch (e)
@@ -200,9 +200,9 @@ WTR_Overlay.addVerifyText = function(_oEvent)
 	{
 		var strSelection = document.commandDispatcher.focusedWindow.getSelection().toString();
 	
-		var oStep = new WTRStep("verifyText", {
+		var oStep = new WTRStep('verifyText', {
 			text: strSelection,
-			description: "Verify that text is contained in the page"
+			description: 'Verify that text is contained in the page'
 			});
 		
 		myThis.addStep(oStep, document.popupNode, _oEvent);
@@ -224,10 +224,10 @@ WTR_Overlay.addVerifySelectField = function(_oEvent)
 	{
 		var focusedElement = document.popupNode;
 	
-		var oStep = new WTRStep("verifySelectField", {
+		var oStep = new WTRStep('verifySelectField', {
 			name: focusedElement.name,
 			value: focusedElement.value,
-			description: "Verify the value of the select value"
+			description: 'Verify the value of the select value'
 			});
 
 		myThis.addStep(oStep, focusedElement, _oEvent);
@@ -249,7 +249,7 @@ WTR_Overlay.addVerifyInputField = function(_oEvent)
 	{
 		var focusedElement = document.popupNode;
 	
-		var oStep = new WTRStep("verifyInputField", {
+		var oStep = new WTRStep('verifyInputField', {
 			value: focusedElement.value,
 			name: focusedElement.name
 			});
@@ -273,7 +273,7 @@ WTR_Overlay.addVerifyTextArea = function(_oEvent)
 	{
 		var focusedElement = document.popupNode;
 	
-		var oStep = new WTRStep("verifyTextarea", {
+		var oStep = new WTRStep('verifyTextarea', {
 			text: focusedElement.value,
 			name: focusedElement.name
 			});
@@ -308,7 +308,7 @@ WTR_Overlay.decorateStep = function(_oStep, _oEvent)
 {
 	if (_oEvent && _oEvent.ctrlKey)
 	{
-		return new WTRStep("not", {wtrChildren: _oStep});
+		return new WTRStep('not', {wtrChildren: _oStep});
 	}
 	return _oStep;
 }
@@ -318,7 +318,7 @@ Just for debug purposes
 */
 WTR_Overlay.toString = function()
 {
-	return "[object WTR_Overlay]";
+	return '[object WTR_Overlay]';
 }
 
 /**
@@ -355,10 +355,10 @@ WTR_Overlay.loadResourcesFromOriginalSite = function(_oEvent)
 		for (var i=0; i<nbImages; ++i)
 		{
 			var oImg = oDoc.images[i];
-			var originalSrc = oImg.getAttribute("src");
+			var originalSrc = oImg.getAttribute('src');
 			if (oImg.src != originalSrc)
 			{
-				if (originalSrc.indexOf("/") == 0)
+				if (originalSrc.indexOf('/') == 0)
 					oImg.src = urlServerUrl + originalSrc;
 				else
 					oImg.src = urlDirUrl + originalSrc;
@@ -372,15 +372,15 @@ WTR_Overlay.loadResourcesFromOriginalSite = function(_oEvent)
 		for (var i=0; i<nbCSS; ++i)
 		{
 			var oCSS = oDoc.styleSheets[i];
-			var originalSrc = oCSS.ownerNode.getAttribute("href");
+			var originalSrc = oCSS.ownerNode.getAttribute('href');
 			if (oCSS.href != originalSrc)
 			{
-				var newHref = "";
-				if (originalSrc.indexOf("/") == 0)
+				var newHref = '';
+				if (originalSrc.indexOf('/') == 0)
 					newHref = urlServerUrl + originalSrc;
 				else
 					newHref = urlDirUrl + originalSrc;
-				oCSS.ownerNode.setAttribute("href", newHref);
+				oCSS.ownerNode.setAttribute('href', newHref);
 			}
 		}
 	};
@@ -389,8 +389,8 @@ WTR_Overlay.loadResourcesFromOriginalSite = function(_oEvent)
 	if (infoData['url'])
 	{
 		var url = infoData['url'];
-		var urlServerUrl = url.match(".*//[^/]*")[0];
-		var urlDirUrl = url.match(".*/")[0];
+		var urlServerUrl = url.match('.*//[^/]*')[0];
+		var urlDirUrl = url.match('.*/')[0];
 		updateImagesSource(urlServerUrl, urlDirUrl);
 		updateStylesheetsSource(urlServerUrl, urlDirUrl);
 	}
@@ -402,16 +402,16 @@ WTR_Overlay.loadResourcesFromOriginalSite = function(_oEvent)
 WTR_Overlay._readInfoFile = function(_oDoc)
 {
 	var x = new XMLHttpRequest();
-	var infoFile = _oDoc.location.toString().split("?")[0] + ".info";
+	var infoFile = _oDoc.location.toString().split('?')[0] + '.info';
 	x.open('GET', infoFile, false);
-	x.send("");
+	x.send('');
 	var txt = x.responseText;
 	var lines = txt.split("\n");
 	var response = {};
 	for (var i=0; i<lines.length; ++i)
 	{
 		var line = lines[i];
-		var p = line.indexOf("=");
+		var p = line.indexOf('=');
 		if (p > 0) {
 			var key = line.substring(0, p);
 			var value = line.substr(p+1);
@@ -438,8 +438,8 @@ WTR_Overlay.makeLinksLive = function(_oEvent)
 	
 	var prependValue = function(_value, _prependValue)
 	{
-		if (_value.charAt(0) != "/")
-			return _prependValue + "/" + _value;
+		if (_value.charAt(0) != '/')
+			return _prependValue + '/' + _value;
 		else
 			return _prependValue + _value;
 	}
@@ -450,8 +450,8 @@ WTR_Overlay.makeLinksLive = function(_oEvent)
 		{
 			var oNode = _colNodes[i];
 			var value = oNode.getAttribute(_attrName);
-			if (value && value.indexOf("javascript:") != 0
-					&& value.indexOf("http://") != 0 && value.indexOf("https://") != 0)
+			if (value && value.indexOf('javascript:') != 0
+					&& value.indexOf('http://') != 0 && value.indexOf('https://') != 0)
 			{
 				var newValue = prependValue(oNode.getAttribute(_attrName), _prependValue);
 				oNode.setAttribute(_attrName, newValue);
@@ -459,46 +459,46 @@ WTR_Overlay.makeLinksLive = function(_oEvent)
 		}
 	}
 
-	var baseTags = oDoc.getElementsByTagName("BASE");
+	var baseTags = oDoc.getElementsByTagName('BASE');
 	if (baseTags.length > 0) {
 		var baseTag = baseTags[0];
-		if (baseTag.href.match("https?://.*")) {
+		if (baseTag.href.match('https?://.*')) {
 			// absolute base tag, nothing to do
 		}
 		else {
-			prependAttrValue(baseTags, "href", oBaseUrl.urlWithoutPath);
+			prependAttrValue(baseTags, 'href', oBaseUrl.urlWithoutPath);
 		}
 	}
 	else {
-		prependAttrValue(oDoc.getElementsByTagName("A"), "href", oBaseUrl.urlWithoutPath);
-		prependAttrValue(oDoc.getElementsByTagName("FORM"), "action", oBaseUrl.urlWithoutPath);
+		prependAttrValue(oDoc.getElementsByTagName('A'), 'href', oBaseUrl.urlWithoutPath);
+		prependAttrValue(oDoc.getElementsByTagName('FORM'), 'action', oBaseUrl.urlWithoutPath);
 	}
 	
 	// define session cookies
 	try
 	{
-		var nbCookies = props["cookies"];
+		var nbCookies = props['cookies'];
 		if (nbCookies)
 		{
-			oWin.status = nbCookies + " cookies set";
+			oWin.status = nbCookies + ' cookies set';
 			nbCookies = parseInt(nbCookies);
 			for (var i=0; i<nbCookies; ++i)
 			{
-				var cookieName = props["cookie." + i + ".name"];
-				var cookieDomain = props["cookie." + i + ".domain"];
-				var cookieValue = props["cookie." + i + ".value"];
-				var cookiePath = props["cookie." + i + ".path"];
+				var cookieName = props['cookie.' + i + '.name'];
+				var cookieDomain = props['cookie.' + i + '.domain'];
+				var cookieValue = props['cookie.' + i + '.value'];
+				var cookiePath = props['cookie.' + i + '.path'];
 				myThis._defineNewSessionCookie(oBaseUrl.scheme, oBaseUrl.host, cookieName, cookieValue, cookiePath);
 			}
 		}
 		else
 		{
-			oWin.status = "No cookie found";
+			oWin.status = 'No cookie found';
 		}
 	}
 	catch (e)
 	{
-		alert("Exception setting cookies: " + e.message)
+		alert('Exception setting cookies: ' + e.message)
 	}
 }
 
@@ -512,7 +512,7 @@ Parses the baseUrl
 */
 WTR_Overlay._parseBaseUrl = function(_strBaseUrl)
 {
-	var serverRE = new RegExp("(http|https)://([^/:]*)(:\\d+)?")
+	var serverRE = new RegExp('(http|https)://([^/:]*)(:\\d+)?')
 	var tab = serverRE.exec(_strBaseUrl);
 	if (!tab)
 		return null;
@@ -522,7 +522,7 @@ WTR_Overlay._parseBaseUrl = function(_strBaseUrl)
 
 /**
 Parses the parameters from the query information
-@param _strSearch the query string (inclusive "?"), may be null
+@param _strSearch the query string (inclusive '?'), may be null
 @return a map of (parameter name, parameter value)
 */
 WTR_Overlay._parseQueryParameters = function(_strSearch)
@@ -530,11 +530,11 @@ WTR_Overlay._parseQueryParameters = function(_strSearch)
 	if (!_strSearch)
 		return {};
 
-	var tab = _strSearch.substr(1).split("&");
+	var tab = _strSearch.substr(1).split('&');
 	var oMap = {}
 	for (var i=0; i<tab.length; ++i)
 	{
-		var tab2 = tab[i].split("=");
+		var tab2 = tab[i].split('=');
 		oMap[tab2[0]] = unescape(tab2[1]);
 	}
 	return oMap;
@@ -542,7 +542,7 @@ WTR_Overlay._parseQueryParameters = function(_strSearch)
 
 /**
 Removes the session cookies with matching host, name and path
-@param _strScheme "http" or "https"
+@param _strScheme 'http' or 'https'
 @param _strHost the host name. Ex: my.server.org
 @param _strName the name of the cookie. Ex: JSESSIONID
 @param _strValue the value of the cookie
@@ -551,24 +551,24 @@ Removes the session cookies with matching host, name and path
 WTR_Overlay._defineNewSessionCookie = function(_strScheme, _strHost, _strName, _strValue, _strPath)
 {
 	// first remove any existing (needed?)
-    var cookieManager = Components.classes["@mozilla.org/cookiemanager;1"].getService(Components.interfaces.nsICookieManager);
+    var cookieManager = Components.classes['@mozilla.org/cookiemanager;1'].getService(Components.interfaces.nsICookieManager);
     cookieManager.remove(_strHost, _strName, _strPath, false);
 
 	// then define new one
-    var cookie = _strName + "=" + _strValue + ";";
+    var cookie = _strName + '=' + _strValue + ';';
 
     // If the host is a domain
-    if (_strHost.charAt(0) == ".")
+    if (_strHost.charAt(0) == '.')
     {
-        cookie += "domain=" + _strHost + ";";
+        cookie += 'domain=' + _strHost + ';';
     }
 
-	cookie += "path=" + _strPath + ";"
+	cookie += 'path=' + _strPath + ';'
 
-	var strUri = _strScheme + "://" + _strHost + _strPath;
-	var uri = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newURI(strUri, null, null);
+	var strUri = _strScheme + '://' + _strHost + _strPath;
+	var uri = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService).newURI(strUri, null, null);
 
-	var cookieService = Components.classes["@mozilla.org/cookieService;1"].getService().QueryInterface(Components.interfaces.nsICookieService);
+	var cookieService = Components.classes['@mozilla.org/cookieService;1'].getService().QueryInterface(Components.interfaces.nsICookieService);
 	cookieService.setCookieString(uri, null, cookie, null);
 }
 
@@ -576,6 +576,6 @@ WTR_Overlay._defineNewSessionCookie = function(_strScheme, _strHost, _strName, _
 wtr_myThis.registerAsMyThis(WTR_Overlay);
 
 // register handler to display right elements in context menu
-window.addEventListener("popupshowing", WTR_Overlay.onPopupShown, false);
-window.addEventListener("popuphidden", WTR_Overlay.onPopupHidden, false);
+window.addEventListener('popupshowing', WTR_Overlay.onPopupShown, false);
+window.addEventListener('popuphidden', WTR_Overlay.onPopupHidden, false);
 
