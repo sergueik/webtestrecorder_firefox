@@ -154,6 +154,9 @@ wtr_Misc.handleDocumentLoad = function (_event)
 
 var WTR_ButtonLocator = {};
 
+// https://github.com/ealves/protractor-recorder    
+// main.controller.js
+// vm.addElement
 WTR_ButtonLocator.locate = function(_oTarget)
 {
 	var stepsVariations = []
